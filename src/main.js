@@ -3,9 +3,12 @@ import App from './App.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './assets/main.scss'
+import { SVG } from '@svgdotjs/svg.js'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(SVG)
 
 Vue.config.productionTip = false
 

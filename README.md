@@ -1,3 +1,0 @@
-Crewmates Website
-====================
-

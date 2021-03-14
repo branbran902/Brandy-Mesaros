@@ -10,10 +10,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone https://github.com/crewmates-app/Crewmates-Website.git
+git clone https://github.com/crewmates-app/Crewmates-Website.git crewmates
 
 # Change directory
-cd myproject
+cd crewmates
 
 # Install NPM dependencies
 npm install

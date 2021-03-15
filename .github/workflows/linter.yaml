@@ -5,7 +5,7 @@ on:
       - master
       - production
 jobs:
-  pull-request:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt install nodejs
           sudo apt install npm
-          npm i -g eslint
+          sudo npm i -g eslint
 
       - name: Run linter
         run: |

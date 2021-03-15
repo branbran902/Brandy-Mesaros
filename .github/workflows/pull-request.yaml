@@ -1,0 +1,16 @@
+name: Create a pull request
+on:
+  push:
+    branches-ignore:
+      - master
+      - production
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create PR
+        run: |
+          hub pull-request --draft -b master -h ${{ github.event.ref }} -a ${{ github.event.pusher.name }} -m "$TITLE" || exit 0

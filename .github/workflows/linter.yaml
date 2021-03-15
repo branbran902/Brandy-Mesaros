@@ -1,4 +1,4 @@
-name: Create a pull request
+name: Lint
 on:
   push:
     branches-ignore:

@@ -1,0 +1,22 @@
+name: Create a pull request
+on:
+  push:
+    branches-ignore:
+      - master
+      - production
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install linter
+        run: |
+          sudo apt install nodejs
+          sudo apt install npm
+          npm i -g eslint
+
+      - name: Run linter
+        run: |
+           eslint ./**

@@ -4,6 +4,9 @@ on:
     branches-ignore:
       - master
       - production
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   pull-request:
     runs-on: ubuntu-latest

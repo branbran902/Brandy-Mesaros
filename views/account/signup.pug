@@ -1,23 +1,55 @@
 extends ../layout
 
 block content
-  .pb-2.mt-2.mb-4.border-bottom
-    h3 Sign up
-  form(id='signup-form', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
-      .col-md-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Password
-      .col-md-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', autocomplete='new-password', minlength='8', required)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
-      .col-md-7
-        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', minlength='8', required)
-    .form-group.offset-sm-3.col-md-7.pl-2
-      button.btn.btn-success(type='submit')
-        i.fas.fa-user-plus.fa-sm
-        | Signup
+  .row.sign-up
+    .col-md-9.text-center.first-side
+      .offset-md-3.col-md-7.pl-2
+        h1 Hello, Friend!
+        h2 Create an account using one of the following 
+      form(method='POST')
+        .form-group
+          .offset-md-3.col-md-7.pl-2
+            a.btn.btn-google.social-btns(href='/auth/google')
+              p.fab.fa-google-plus-g.fa-xs
+            a.btn.btn-facebook.social-btns(href='/auth/facebook')
+              p.fab.fa-facebook-f.fa-sm
+            a.btn.btn-linkedin.social-btns(href='/auth/linkedin')
+              p.fab.fa-linkedin-in.fa-sm
+        .form-group
+          .offset-md-4.col-md-5.pl-2
+            hr
+        .offset-md-3.col-md-7.pl-2
+            h2 or sign up with your email:
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+            input.form-control(type='text', name='firstname', id='firstname', placeholder='First Name', autofocus, autocomplete='first name', required)
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+            input.form-control(type='text', name='lastname', id='lastname', placeholder='Last Name', autocomplete='last name', required)
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+            input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+            input.form-control(type='password', name='password', id='password', placeholder='Password', autocomplete='current-password', required)
+            br
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+            h4.text-left Birthday 
+            p.text-left To sign up, you must be 18 or older. Don't worry, other people won’t see your birthday.
+            input.form-control(type='date', name='birthday', id='birthday', placeholder='Birthday', autocomplete='birthday', required)
+        .form-group.row
+          .offset-md-4.col-md-5.pl-2
+           input.checkbox(type='checkbox' name='terms', id='terms' checked=false)
+           | By signing up, I agree to Crewmates's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.
+        .form-group.row
+          .offset-md-3.col-md-7.pl-2
+            button.col-md-3.btn.submit(type='submit')
+              | Create
+    .col-md-3.text-center.other-side
+      h1 Already have an account?
+      br
+      a.notabtn.signup(href='/login') 
+        | Log In
+

@@ -14,6 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: get commit message
+        run: |
+          echo "COMMIT_MSG=$(git log -1 --pretty=format:%s)" >> $GITHUB_ENV
+
       - name: Create PR
         run: |
-          hub pull-request --draft -b master -h ${{ github.event.ref }} -a ${{ github.event.pusher.name }} -m "$TITLE" || exit 0
+          hub pull-request --draft -b master -h ${{ github.event.ref }} -a ${{ github.event.pusher.name }} -m "$COMMIT_MSG" || exit 0

@@ -23,6 +23,12 @@ $darkGray: #2b2d2e;
 // Scaffolding
 // -------------------------
 
+h1{
+  font-size: 3em;
+  font-weight: bolder;
+  color: $darkBlue;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -61,7 +67,7 @@ footer {
 }
 
 .default {
-  padding-top: 10%;
+  padding: 10%;
 }
 
 
@@ -157,12 +163,19 @@ textarea {
 }
 
 #loginLink {
+  background-color: $darkBlue;
   float: right;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+
+    a {
+      color: white !important;
+    }
 }
 
 .notabtn {
   background-color: $green;
-  width: 15%;
   border: none;
   color: white;
   padding: 15px 45px 27px 45px;
@@ -170,6 +183,7 @@ textarea {
   font-size: x-large;
   margin: 4px 2px;
   border-radius: 50px;
+
 }
 
 // button raised definition
@@ -402,6 +416,7 @@ $enable-gradients: true;
   padding-top: 20%;
 
     h1 {
+      font-size: 3rem;
       color: white;
     }
 
@@ -460,3 +475,23 @@ $enable-gradients: true;
   color: $lightBlue;
   font-size: x-large;
 }
+
+// imgs
+// ---------------------------
+.header {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.headerText {
+  color: white;
+  background-color: $darkBlue;
+  width: fit-content;
+  padding: 2%;
+}
+
+#whyHost{
+  background-image: url(/imgs/SimpleRoom.jpg);
+  
+}
+

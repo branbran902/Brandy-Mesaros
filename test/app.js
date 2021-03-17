@@ -104,3 +104,20 @@ describe('GET /random-url', () => {
       .expect(404, done);
   });
 });
+
+
+describe('GET /about', () => {
+  it('should return 200 OK', (done) => {
+    request(app)
+      .get('/about')
+      .expect(200, done);
+  });
+});
+
+describe('GET /why-host', () => {
+  it('should return 200 OK', (done) => {
+    request(app)
+      .get('/why-host')
+      .expect(200, done);
+  });
+});

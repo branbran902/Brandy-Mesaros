@@ -2,19 +2,19 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DB,
-                                process.env.USER,
-                                process.env.PASSWORD,
+const sequelize = new Sequelize(process.env.POSTGRES_DB,
+                                process.env.POSTGRES_USER,
+                                process.env.POSTGRES_PASSWORD,
                                 {
-                                    host: process.env.HOST,
-                                    port: process.env.PORT,
+                                    host: process.env.POSTGRES_HOST,
+                                    port: process.env.POSTGRES_PORT,
                                     dialect: 'postgres',
                                     dialectOptions: {
-                                        ssl: process.env.DB_SSL == "true"
+                                        ssl: process.env.POSTGRES_DB_SSL == "true"
                                     }
                                 });
 
-const userSchema = sequelize.define('user', {
+const User = sequelize.define('User', {
   email: { type: Sequelize.STRING, unique: true },
   password: Sequelize.STRING,
   passwordResetToken: Sequelize.STRING,
@@ -35,7 +35,10 @@ const userSchema = sequelize.define('user', {
   tokens: Sequelize.STRING,
 }, { timestamps: true });
 
-const profileSchema = sequelize.define('profile', {
+console.log(sequelize.models)
+console.log(sequelize.models.User === User)
+
+const Profile = sequelize.define('Profile', {
     name: Sequelize.STRING,
     gender: Sequelize.STRING,
     location: Sequelize.STRING,
@@ -43,13 +46,13 @@ const profileSchema = sequelize.define('profile', {
     picture: Sequelize.STRING,
 });
 
-userSchema.hasOne(profileSchema);
-profileSchema.belongsTo(userSchema);
+User.hasOne(Profile);
+Profile.belongsTo(User);
 
 /**
  * Password hash middleware.
  */
-userSchema.addHook('beforeSave', (next) => {
+User.addHook('beforeSave', (next) => {
   const user = this;
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
@@ -65,7 +68,7 @@ userSchema.addHook('beforeSave', (next) => {
 /**
  * Helper method for validating user's password.
  */
-userSchema.comparePassword = function comparePassword(candidatePassword, cb) {
+User.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });
@@ -74,7 +77,7 @@ userSchema.comparePassword = function comparePassword(candidatePassword, cb) {
 /**
  * Helper method for getting user's gravatar.
  */
-userSchema.gravatar = function gravatar(size) {
+User.gravatar = function gravatar(size) {
   if (!size) {
     size = 200;
   }
@@ -84,6 +87,8 @@ userSchema.gravatar = function gravatar(size) {
   const md5 = crypto.createHash('md5').update(this.email).digest('hex');
   return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
+
+User.sync({ force: true})
 
 const Person = sequelize.define('Person', {
     firstName: {
@@ -95,8 +100,12 @@ const Person = sequelize.define('Person', {
         allowNull: true
     },
 });
+
+Person.sync({ force: true})
+
 module.exports = {
     sequelize: sequelize,
     Person: Person,
-    User: userSchema,
+    User: User,
+    Profile: Profile,
 };

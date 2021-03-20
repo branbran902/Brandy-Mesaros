@@ -204,7 +204,6 @@ exports.getTwilio = (req, res) => {
 exports.postTwilio = (req, res, next) => {
   const validationErrors = [];
   if (validator.isEmpty(req.body.number)) validationErrors.push({ msg: 'Phone number is required.' });
-  if (validator.isEmpty(req.body.message)) validationErrors.push({ msg: 'Message cannot be blank.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -214,7 +213,7 @@ exports.postTwilio = (req, res, next) => {
   const message = {
     to: req.body.number,
     from: '+13472235148',
-    body: req.body.message
+    body: 'Hello'
   };
   twilio.messages.create(message).then((sentMessage) => {
     req.flash('success', { msg: `Text send to ${sentMessage.to}` });

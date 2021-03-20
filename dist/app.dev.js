@@ -56,6 +56,8 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 
 var navbarController = require('./controllers/navbar');
+
+var errorController = require('./controllers/error');
 /**
  * API keys and Passport configuration.
  */
@@ -171,7 +173,9 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink); //NAVBAR
 
 app.get('/about', navbarController.getAbout);
-app.get('/why-host', navbarController.getWhyHost);
+app.get('/why-host', navbarController.getWhyHost); //ERROR
+
+app.get('/503', errorController.get503);
 /**
  * API examples routes.
  */

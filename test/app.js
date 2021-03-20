@@ -17,6 +17,15 @@ describe('GET /login', () => {
   });
 });
 
+
+describe('GET /phone-verification', () => {
+  it('should return 200 OK', (done) => {
+    request(app)
+      .get('/login')
+      .expect(200, done);
+  });
+});
+
 describe('GET /signup', () => {
   it('should return 200 OK', (done) => {
     request(app)
@@ -118,6 +127,14 @@ describe('GET /why-host', () => {
   it('should return 200 OK', (done) => {
     request(app)
       .get('/why-host')
+      .expect(200, done);
+  });
+});
+
+describe('GET /error/503', () => {
+  it('should return 200 OK', (done) => {
+    request(app)
+      .get('/error/503')
       .expect(200, done);
   });
 });

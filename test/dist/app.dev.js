@@ -14,6 +14,11 @@ describe('GET /login', function () {
     request(app).get('/login').expect(200, done);
   });
 });
+describe('GET /phone-verification', function () {
+  it('should return 200 OK', function (done) {
+    request(app).get('/login').expect(200, done);
+  });
+});
 describe('GET /signup', function () {
   it('should return 200 OK', function (done) {
     request(app).get('/signup').expect(200, done);
@@ -77,5 +82,10 @@ describe('GET /about', function () {
 describe('GET /why-host', function () {
   it('should return 200 OK', function (done) {
     request(app).get('/why-host').expect(200, done);
+  });
+});
+describe('GET /error/503', function () {
+  it('should return 200 OK', function (done) {
+    request(app).get('/error/503').expect(200, done);
   });
 });

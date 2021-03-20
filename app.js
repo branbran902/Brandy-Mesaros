@@ -32,6 +32,7 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const navbarController = require('./controllers/navbar');
+const errorController = require('./controllers/error');
 
 /**
  * API keys and Passport configuration.
@@ -135,6 +136,10 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 //NAVBAR
 app.get('/about', navbarController.getAbout);
 app.get('/why-host', navbarController.getWhyHost);
+
+
+//ERROR
+app.get('/503', errorController.get503);
 
 /**
  * API examples routes.

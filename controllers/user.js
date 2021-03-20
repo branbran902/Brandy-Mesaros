@@ -93,6 +93,20 @@ exports.postLogin = (req, res, next) => {
 };
 
 /**
+ * GET /login
+ * Login page.
+ */
+ exports.getPhoneVerification = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/phoneVerification ', {
+    title: 'Phone'
+  });
+};
+
+
+/**
  * GET /logout
  * Log out.
  */
@@ -129,8 +143,9 @@ exports.postSignup = (req, res, next) => {
   if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' });
 
   if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/signup');
+    // req.flash('errors', validationErrors);
+    // return res.redirect('/signup');
+    console.log("issues");
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
@@ -151,7 +166,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.redirect('/api/twilio');
       });
     });
   });

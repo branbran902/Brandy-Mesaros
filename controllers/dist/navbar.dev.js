@@ -9,12 +9,12 @@ exports.getAbout = function (req, res) {
     title: 'About'
   });
 };
+
+
 /**
  * GET /why-host
  * About page.
  */
-
-
 exports.getWhyHost = function (req, res) {
   res.render('navbar/whyhost', {
     title: 'Why Host?'

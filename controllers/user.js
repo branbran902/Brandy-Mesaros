@@ -93,20 +93,6 @@ exports.postLogin = (req, res, next) => {
 };
 
 /**
- * GET /login
- * Login page.
- */
- exports.getPhoneVerification = (req, res) => {
-  if (req.user) {
-    return res.redirect('/');
-  }
-  res.render('account/phoneVerification ', {
-    title: 'Phone'
-  });
-};
-
-
-/**
  * GET /logout
  * Log out.
  */

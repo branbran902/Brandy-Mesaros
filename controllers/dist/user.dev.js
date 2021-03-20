@@ -126,21 +126,6 @@ exports.postLogin = function (req, res, next) {
   })(req, res, next);
 };
 /**
- * GET /login
- * Login page.
- */
-
-
-exports.getPhoneVerification = function (req, res) {
-  if (req.user) {
-    return res.redirect('/');
-  }
-
-  res.render('account/phoneVerification ', {
-    title: 'Phone'
-  });
-};
-/**
  * GET /logout
  * Log out.
  */

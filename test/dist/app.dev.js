@@ -14,11 +14,6 @@ describe('GET /login', function () {
     request(app).get('/login').expect(200, done);
   });
 });
-describe('GET /phone-verification', function () {
-  it('should return 200 OK', function (done) {
-    request(app).get('/login').expect(200, done);
-  });
-});
 describe('GET /signup', function () {
   it('should return 200 OK', function (done) {
     request(app).get('/signup').expect(200, done);

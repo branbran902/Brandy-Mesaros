@@ -140,7 +140,6 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
     user.save((err) => {

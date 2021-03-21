@@ -175,6 +175,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get('/about', navbarController.getAbout);
 app.get('/why-host', navbarController.getWhyHost); //ERROR
 
+app.get('/oops', errorController.getOops);
 app.get('/503', errorController.get503);
 /**
  * API examples routes.

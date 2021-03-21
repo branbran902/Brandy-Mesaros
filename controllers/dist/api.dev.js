@@ -324,7 +324,7 @@ exports.postTwilio = function (req, res, next) {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/api/twilio');
+    return res.redirect('/error/oops');
   }
 
   var message = {
@@ -336,7 +336,7 @@ exports.postTwilio = function (req, res, next) {
     req.flash('success', {
       msg: "Text send to ".concat(sentMessage.to)
     });
-    res.redirect('/api/twilio');
+    res.redirect('/error/oops');
   })["catch"](next);
 };
 /**

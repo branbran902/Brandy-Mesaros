@@ -1,11 +1,9 @@
 .navbar.navbar-light.fixed-top.navbar-expand-lg
     .row
-      .col-lg-3
+      .col-sm-3
         a.navbar-brand(href='/')
-          img(id="navbar-logo" src="/imgs/FullLongLogo_White.svg")
-      //- .col-lg-6
-      //-     input.form-control(type='text', class='form-control-lg' name='search', id='search', placeholder='Search Airports', autofocus)
-      .col-lg-9
+          img(id="navbar-logo" src="/imgs/FullLongLogo.svg")
+      .col-sm-9.all-nav-links
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
           span.sr-only Toggle navigation
           span.navbar-toggler-icon
@@ -15,12 +13,12 @@
               li.nav-item(class=(title === 'Login') ? 'active' : undefined)
                 a.nav-link(href='/login') Crash Pads
               li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
-                a.nav-link(href='/signup') Why Host?
+                a.nav-link(href='/why-host') Why Host?
               li.nav-item(class=(title === 'Login') ? 'active' : undefined)
-                a.nav-link(href='/login') About
+                a.nav-link(href='/about') About
               li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
                 a.nav-link(href='/signup') Crashpad Quiz
-              li.nav-item(id="loginLink" class=(title === 'Login') ? 'active' : undefined)
+              li.nav-item.notabtn(id="loginLink" class=(title === 'Login') ? 'active' : undefined)
                 a.nav-link(href='/login') Login
             else
               li.dropdown(class=(title === 'Account Management') ? 'active' : undefined).nav-item

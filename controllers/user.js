@@ -6,10 +6,9 @@ const passport = require('passport');
 const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
-const User = require('../models/User');
+const { sequelize, Person, User } = require('../models/User');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
-
 /**
  * Helper Function to Send Mail.
  */
@@ -134,16 +133,14 @@ exports.postSignup = (req, res, next) => {
     console.log("issues");
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
-
-  const user = new User({
+  const user = User.build({
     email: req.body.email,
     password: req.body.password
   });
 
-  User.findOne({ email: req.body.email }, (err, existingUser) => {
+  User.findOne({ where: { email: req.body.email } }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
     user.save((err) => {
@@ -155,7 +152,7 @@ exports.postSignup = (req, res, next) => {
         res.redirect('/api/twilio');
       });
     });
-  });
+  }).catch(err => console.log(err));
 };
 
 /**

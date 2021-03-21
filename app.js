@@ -139,6 +139,7 @@ app.get('/why-host', navbarController.getWhyHost);
 
 
 //ERROR
+app.get('/oops', errorController.getOops);
 app.get('/503', errorController.get503);
 
 /**

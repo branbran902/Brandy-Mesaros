@@ -2,11 +2,10 @@ extends ../layout
 
 block content
     .default
-        h1 Our bad! 
-        h2 Error Code: 503
+        h1 Mayday! Mayday! Mayday!
         
         br
 
         if errors
             for error, i in errors
-                div.alert.alert-danger #{ error }
+                div.alert.alert-danger #{ errors }

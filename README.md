@@ -39,7 +39,8 @@ run `docker version`. If there is an error, find instructions for installing doc
 
 Specs
 ---------------
-Node: 14.16.0
+Node: 10.19.0
+Npm: 14.16.0
 
 
 Integrations
@@ -49,5 +50,6 @@ Integrations
 - Google Maps
 - Google Analytics
 - Facebook Login
+- Twitter Login
 - Strip Payment
 

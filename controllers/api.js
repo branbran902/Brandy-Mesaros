@@ -203,21 +203,31 @@ exports.getTwilio = (req, res) => {
  */
 exports.postTwilio = (req, res, next) => {
   const validationErrors = [];
-  if (validator.isEmpty(req.body.number)) validationErrors.push({ msg: 'Phone number is required.' });
+
+  /*
+  * For some reason the validator isEmpty functinon is not working correctly
+  */
+
+  // if (validator.isEmpty(req.body.number)) validationErrors.push({ msg: 'Phone number is required.' });
+
+  var pn = req.body.phoneNumber;
+  if (!pn.trim()) {
+    validationErrors.push({ msg: 'Phone number is required.' });
+  }
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/error/oops');
+    return res.redirect('/oops');
   }
 
   const message = {
-    to: req.body.number,
-    from: '+13472235148',
+    to: pn,
+    from: '+15005550006',
     body: 'Hello'
   };
   twilio.messages.create(message).then((sentMessage) => {
     req.flash('success', { msg: `Text send to ${sentMessage.to}` });
-    res.redirect('/error/oops');
+    res.redirect('/oops');
   }).catch(next);
 };
 

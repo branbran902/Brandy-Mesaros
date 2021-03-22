@@ -64,7 +64,6 @@ footer {
 .row {
   // flex-wrap: nowrap !important;
   height: 100%;
-  margin: 0;
 }
 
 .default {
@@ -121,7 +120,7 @@ textarea {
   padding-top: 1%;
   padding-bottom: 0px;
   margin-bottom: 20px;
-  display: block;
+  display: contents;
 }
 
 .navbar-brand{
@@ -240,7 +239,8 @@ $enable-gradients: true;
 // -------------------------
 
 .alert {
-  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 // Thumbnails
@@ -283,9 +283,10 @@ $enable-gradients: true;
 .hero{
   padding-top: 10vh;
   text-align: center;
-  background-image: url(/imgs/Slider02.jpg);
+  background-image: url(/imgs/Slider01.png);
   background-size: cover;
   padding: 15%;
+  height: 70vh;
 
 
     h1, h2 {
@@ -401,19 +402,19 @@ $enable-gradients: true;
     }
 
     .social-btns {
-      background-color: transparent;
+      background-color: white;
       border: 2px solid $darkBlue;
       color: $darkBlue;
       height: 100px;
       width: 100px;
-      font-size: 5em;
+      font-size: 4em;
       margin: 3%;
     }
 }
 
 .other-side{
   background-image: url(/imgs/PlaneBackground_Blue.jpg);
-  height: 100vh;
+  // height: 100vh;
   padding-top: 20%;
 
     h1 {

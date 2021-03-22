@@ -230,6 +230,9 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+app.get('*', errorController.get404);
+
+
 /**
  * Start Express server.
  */

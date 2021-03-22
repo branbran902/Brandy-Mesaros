@@ -13,8 +13,8 @@ block content
               p.fab.fa-google-plus-g.fa-xs
             a.btn.btn-facebook.social-btns(href='/auth/facebook')
               p.fab.fa-facebook-f.fa-sm
-            a.btn.btn-linkedin.social-btns(href='/auth/linkedin')
-              p.fab.fa-linkedin-in.fa-sm
+            a.btn.btn-twitter.social-btns(href='/auth/twitter')
+              p.fab.fa-twitter.fa-sm
         .form-group
           .offset-md-4.col-md-5.pl-2
             hr
@@ -43,6 +43,9 @@ block content
           .offset-md-4.col-md-5.pl-2
            input.checkbox(type='checkbox' name='terms', id='terms' checked=false)
            | By signing up, I agree to Crewmates's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.
+        if errors
+          for error, i in errors
+            p #{ errors }
         .form-group.row
           .offset-md-3.col-md-7.pl-2
             button.col-md-3.btn.submit(type='submit')

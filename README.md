@@ -26,10 +26,10 @@ node app.js
 
 Running Postgres
 ----------------
-Ensure that the `docker-run.sh` file is executable.
+Ensure that the `run-docker.sh` file is executable.
 
-On Linux/UNIX, simply run `chmod +x docker-run.sh`
-Then run `./docker-run.sh`
+On Linux/UNIX, simply run `chmod +x run-docker.sh`
+Then run `./run-docker.sh`
 
 Follow the instructions from the output of the script for any errors that occur. 
 
@@ -39,7 +39,9 @@ run `docker version`. If there is an error, find instructions for installing doc
 
 Specs
 ---------------
-Node: 14.16.0
+Node: v14.16.0
+npm: v6.14.11
+
 
 
 Integrations

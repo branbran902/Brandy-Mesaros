@@ -12,12 +12,12 @@
             if !user
               li.nav-item(class=(title === 'Login') ? 'active' : undefined)
                 a.nav-link(href='/login') Crash Pads
-              li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
-                a.nav-link(href='/why-host') Why Host?
-              li.nav-item(class=(title === 'Login') ? 'active' : undefined)
-                a.nav-link(href='/about') About
-              li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
-                a.nav-link(href='/signup') Crashpad Quiz
+              //- li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
+              //-   a.nav-link(href='/why-host') Why Host?
+              //- li.nav-item(class=(title === 'Login') ? 'active' : undefined)
+              //-   a.nav-link(href='/about') About
+              //- li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
+              //-   a.nav-link(href='/signup') Crashpad Quiz
               li.nav-item.notabtn(id="loginLink" class=(title === 'Login') ? 'active' : undefined)
                 a.nav-link(href='/login') Login
             else

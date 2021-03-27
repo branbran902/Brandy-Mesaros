@@ -3,7 +3,7 @@ if [ "$1" != "" ];
 then
     pass=$1
 else
-    pass="mysecretpassword"
+    pass="password"
     printf "\ncreated with default password $pass\n"
 fi
 

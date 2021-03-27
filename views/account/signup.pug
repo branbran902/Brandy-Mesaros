@@ -41,8 +41,7 @@ block content
             input.form-control(type='date', name='birthday', id='birthday', placeholder='Birthday', autocomplete='birthday', required)
         .form-group.row
           .offset-md-4.col-md-5.pl-2
-           input.checkbox(type='checkbox' name='terms', id='terms' checked=false)
-           | By signing up, I agree to Crewmates's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.
+           | By clicking "Create", I agree to Crewmates's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.
         if errors
           for error, i in errors
             p #{ errors }

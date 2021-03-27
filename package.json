@@ -29,6 +29,8 @@
     "chart.js": "^2.9.4",
     "cheerio": "^1.0.0-rc.3",
     "compression": "^1.7.4",
+    "connect-pg-simple": "^6.2.1",
+    "connect-session-sequelize": "^7.1.1",
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
@@ -63,7 +65,7 @@
     "pug": "^3.0.2",
     "sequelize": "^6.6.2",
     "stripe": "^8.130.0",
-    "twilio": "^3.54.0",
+    "twilio": "^3.59.0",
     "twitter-lite": "^0.14.0",
     "validator": "^13.5.2"
   },

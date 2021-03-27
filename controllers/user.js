@@ -4,7 +4,8 @@ const passport = require('passport');
 const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
-const { sequelize, Person, User } = require('../models/User');
+const { user } = require('../models/user');
+const { sequelize} = require('../models/database');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
@@ -45,11 +46,11 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      return res.redirect('/account/dashboard');
     });
   })(req, res, next);
 };
+
 
 /**
  * GET /logout
@@ -85,47 +86,36 @@ exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
   if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' });
-  // if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
     return res.redirect('/signup');
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
-  const user = User.build({
+  const aUser = user.build({
+    firstName: req.body.firstname,
+    lastName: req.body.lastname,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    birthday: req.body.birthday
   });
 
 
-  User.findOne({ where: { email: req.body.email }}).then(exists => {
+  user.findOne({ where: { email: req.body.email }})
+  .then(exists => {
     if (!exists){
-      user.save();
+      aUser.save();
       res.redirect('/api/twilio');
     } 
+    else{
+      validationErrors.push({msg: "We found an account with that email. Please log in instead."});
+      req.flash('errors', );
+      return res.redirect('/signup', validationErrors);
+    }
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))};
 
   
-
-//   User.findOne({ where: { email: req.body.email } }, (err, existingUser) => {
-//     if (err) { return next(err); }
-//     if (existingUser) {
-//       return res.redirect('/signup');
-//     }
-//     user.save((err) => {
-//       if (err) { return next(err); }
-//       req.logIn(user, (err) => {
-//         if (err) {
-//           return next(err);
-//         }
-//         res.redirect('/api/twilio');
-//       });
-//     });
-//   }).catch(err => console.log(err));
-// };
-};
-
 /**
  * GET /account
  * Profile page.
@@ -150,7 +140,7 @@ exports.postUpdateProfile = (req, res, next) => {
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
-  User.findById(req.user.id, (err, user) => {
+  user.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     if (user.email !== req.body.email) user.emailVerified = false;
     user.email = req.body.email || '';
@@ -186,7 +176,7 @@ exports.postUpdatePassword = (req, res, next) => {
     return res.redirect('/account');
   }
 
-  User.findById(req.user.id, (err, user) => {
+  user.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.password = req.body.password;
     user.save((err) => {
@@ -202,7 +192,7 @@ exports.postUpdatePassword = (req, res, next) => {
  * Delete user account.
  */
 exports.postDeleteAccount = (req, res, next) => {
-  User.deleteOne({ _id: req.user.id }, (err) => {
+  user.deleteOne({ _id: req.user.id }, (err) => {
     if (err) { return next(err); }
     req.logout();
     req.flash('info', { msg: 'Your account has been deleted.' });
@@ -216,7 +206,7 @@ exports.postDeleteAccount = (req, res, next) => {
  */
 exports.getOauthUnlink = (req, res, next) => {
   const { provider } = req.params;
-  User.findById(req.user.id, (err, user) => {
+  user.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user[provider.toLowerCase()] = undefined;
     const tokensWithoutProviderToUnlink = user.tokens.filter((token) =>
@@ -274,7 +264,7 @@ exports.postForgot = (req, res, next) => {
     .then((buf) => buf.toString('hex'));
 
   const setRandomToken = (token) =>
-    User
+    user
       .findOne({ email: req.body.email })
       .then((user) => {
         if (!user) {
@@ -316,4 +306,14 @@ exports.postForgot = (req, res, next) => {
     .then(sendForgotPasswordEmail)
     .then(() => res.redirect('/forgot'))
     .catch(next);
+};
+
+/**
+ * GET Dashboard
+ * The Dashboard
+ */
+ exports.getDashboard= (req, res) => {
+  res.render('account/dashboard', {
+    title: 'Dashboard'
+  });
 };

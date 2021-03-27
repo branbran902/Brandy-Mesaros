@@ -3,7 +3,6 @@
  */
 const express = require('express');
 const compression = require('compression');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const chalk = require('chalk');
@@ -15,6 +14,15 @@ const path = require('path');
 const passport = require('passport');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const pg = require('pg')
+  , session = require('express-session')
+  , pgSession = require('connect-pg-simple')(session);
+
+const Sequelize = require("sequelize");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
+
+
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -37,6 +45,9 @@ const errorController = require('./controllers/error');
  * API keys and Passport configuration.
  */
 const passportConfig = require('./config/passport');
+const { sequelize } = require('./models/database');
+
+
 
 /**
  * Create Express server.
@@ -58,18 +69,37 @@ app.use(sass({
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
-  // store: new MongoStore({
-  //   url: process.env.MONGODB_URI,
-  //   autoReconnect: true,
-  // })
-}));
+
+store = new SequelizeStore({
+  db: sequelize,
+});
+
+app.use(
+  session({
+      secret: "keyboard cat",
+      store: store,
+      resave: false,
+      proxy: true,
+    })
+);
+
+store.sync();
+
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session())
+
+/*
+app.use(session ({
+  store: new pgSession({
+    conString: "pg://postgres:password@localhost:5432/postgres",
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+}));
+*/
+
 app.use(flash());
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
@@ -121,11 +151,12 @@ app.post('/forgot', userController.postForgot);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
-app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
-app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
-app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+// app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
+// app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+// app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
+// app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+// app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+// app.get('/account/dashboard', passportConfig.isAuthenticated, userController.getDashboard);
 
 //NAVBAR
 app.get('/about', navbarController.getAbout);

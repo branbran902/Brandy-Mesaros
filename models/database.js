@@ -1,28 +1,32 @@
-// database.js
-
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DB_SCHEMA || 'postgres',
-                                process.env.DB_USER || 'postgres',
-                                process.env.DB_PASSWORD || '',
+const sequelize = new Sequelize(process.env.POSTGRES_DB,
+                                process.env.POSTGRES_USER,
+                                process.env.POSTGRES_PASSWORD,
                                 {
-                                    host: process.env.DB_HOST || 'localhost',
-                                    port: process.env.DB_PORT || 5432,
+                                    host: process.env.POSTGRES_HOST,
+                                    port: process.env.POSTGRES_PORT,
                                     dialect: 'postgres',
                                     dialectOptions: {
-                                        ssl: process.env.DB_SSL == "true"
+                                        ssl: process.env.POSTGRES_DB_SSL == "true"
                                     }
+                                },{
+                                  logging: console.log,  
                                 });
-const Person = sequelize.define('Person', {
-    firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    lastName: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },
-});
-module.exports = {
-    sequelize: sequelize,
-    Person: Person
-};
+
+                                test();
+
+                                async function test(){
+                                  try {
+                                   console.log('Gonna authenticate'); // <== to make sure console.log is working and not overrided!
+                                   var conn = await sequelize.authenticate()
+                                   .then(() => console.log('All Done :)'))
+                                   .catch(err => console.error(err))
+                                   console.log('Connection has been established successfully.');
+                                 } catch (error) {
+                                   console.error('Unable to connect to the database:', error);
+                                 }
+                               }
+
+                               module.exports = {
+                                sequelize: sequelize
+                            };

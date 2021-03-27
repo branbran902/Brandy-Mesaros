@@ -1,6 +1,6 @@
 // const Twitter = require('twitter-lite');
 // const stripe = require('stripe')(process.env.STRIPE_SKEY);
-// const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 // const crypto = require('crypto');
 // const axios = require('axios');
 // const Quickbooks = require('node-quickbooks');
@@ -143,7 +143,6 @@ exports.getTwilio = (req, res) => {
 exports.postTwilio = (req, res, next) => {
   const validationErrors = [];
 
-  
   //For some reason the validator isEmpty functinon is not working correctly
   // if (validator.isEmpty(req.body.number)) validationErrors.push({ msg: 'Phone number is required.' });
 
@@ -154,17 +153,19 @@ exports.postTwilio = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/oops');
+
+    var string = encodeURIComponent(validationErrors);
+    res.redirect('/oops?error=' + string);
   }
 
   const message = {
     to: pn,
-    from: '+15005550006',
+    from: '+14154461279',
     body: 'Hello'
   };
   twilio.messages.create(message).then((sentMessage) => {
     req.flash('success', { msg: `Text send to ${sentMessage.to}` });
-    res.redirect('/oops');
+    res.redirect('/account/dashboard');
   }).catch(next);
 };
 

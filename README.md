@@ -45,6 +45,7 @@ Specs
 Node: v14.16.0
 npm: v6.14.11
 
+ 
 
 
 Integrations
@@ -54,6 +55,7 @@ Integrations
 - Google Maps
 - Google Analytics
 - Facebook Login
+- Twitter Login
 - Strip Payment
 
 Common issues

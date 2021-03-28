@@ -1,0 +1,22 @@
+name: Create PR
+on:
+  push:
+    branches-ignore:
+      - master
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Create PR
+        run: |
+          TITLE=$(echo ${{ github.event.ref }} | sed -E 's/^refs\/heads\/[a-z]+\/(.*)$/\1/' | tr '-' ' ')
+          TITLE="$(tr '[:lower:]' '[:upper:]' <<< ${TITLE:0:1})${TITLE:1}"
+          echo $TITLE
+          hub pull-request --draft -b master -h ${{ github.event.ref }} -a ${{ github.event.pusher.name }} -m "$TITLE" || exit 0

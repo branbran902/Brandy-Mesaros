@@ -27,6 +27,6 @@ const sequelize = new Sequelize(process.env.POSTGRES_DB,
                                  }
                                }
 
-                               module.exports = {
-                                sequelize: sequelize
-                            };
+module.exports = {
+    sequelize: sequelize
+};

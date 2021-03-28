@@ -12,24 +12,29 @@ const dotenv = require('dotenv');
 const flash = require('express-flash');
 const path = require('path');
 const passport = require('passport');
+const passportConfig = require('./config/passport');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
-const pg = require('pg')
-  , session = require('express-session')
-  , pgSession = require('connect-pg-simple')(session);
-
 const Sequelize = require("sequelize");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const session = require("express-session");
 
-
-
+// Initalize sequelize with session store
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
+const sequelize = new Sequelize(process.env.POSTGRES_DB,
+  process.env.POSTGRES_USER,
+  process.env.POSTGRES_PASSWORD,
+  {
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
+      dialect: 'postgres',
+      dialectOptions: {
+          ssl: process.env.POSTGRES_DB_SSL == "true"
+      }
+  },{
+    logging: console.log,  
+  });
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
-
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
-dotenv.config({ path: '.env.example' });
 
 /**
  * Controllers (route handlers).
@@ -42,17 +47,54 @@ const navbarController = require('./controllers/navbar');
 const errorController = require('./controllers/error');
 
 /**
- * API keys and Passport configuration.
- */
-const passportConfig = require('./config/passport');
-const { sequelize } = require('./models/database');
-
-
-
-/**
  * Create Express server.
  */
 const app = express();
+
+var sessionStore = new SequelizeStore({
+  checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
+  expiration: 24 * 60 * 60 * 1000,  // The maximum age (in milliseconds) of a valid session.
+  db: sequelize
+});
+app.use(
+  session({
+    key: 'user_sid',
+    secret: "keyboard cat",
+    store: sessionStore,
+    saveUninitialized: false,
+    resave: false,
+    proxy: true,
+    cookie: {
+      expires: 600000,
+      httpOnly: false
+  }
+  })
+);
+
+sessionStore.sync();
+
+
+/**
+ * Cookies 
+ */
+// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
+// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
+// app.use((req, res, next) => {
+//   if (req.cookies.user_sid && !req.session.user) {
+//       res.clearCookie('user_sid');        
+//   }
+//   next();
+// });
+
+
+// // middleware function to check for logged-in users
+// var sessionChecker = (req, res, next) => {
+//   if (req.session.user && req.cookies.user_sid) {
+//       res.redirect('/account/dashboard');
+//   } else {
+//       next();
+//   }    
+// };
 
 /**
  * Express configuration.
@@ -70,35 +112,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-store = new SequelizeStore({
-  db: sequelize,
-});
-
-app.use(
-  session({
-      secret: "keyboard cat",
-      store: store,
-      resave: false,
-      proxy: true,
-    })
-);
-
-store.sync();
-
 app.use(passport.initialize());
-app.use(passport.session())
-
-/*
-app.use(session ({
-  store: new pgSession({
-    conString: "pg://postgres:password@localhost:5432/postgres",
-  }),
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-}));
-*/
+app.use(passport.session());
+// require('./config/passport')(passport);
 
 app.use(flash());
 app.use((req, res, next) => {
@@ -109,6 +125,7 @@ app.use((req, res, next) => {
     lusca.csrf()(req, res, next);
   }
 });
+
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 app.disable('x-powered-by');
@@ -151,12 +168,12 @@ app.post('/forgot', userController.postForgot);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
-// app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-// app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
-// app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
-// app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-// app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
-// app.get('/account/dashboard', passportConfig.isAuthenticated, userController.getDashboard);
+app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
+app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
+app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+app.get('/account/dashboard', passportConfig.isAuthenticated, userController.getDashboard);
 
 //NAVBAR
 app.get('/about', navbarController.getAbout);

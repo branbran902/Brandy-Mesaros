@@ -39,14 +39,18 @@ exports.postLogin = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   passport.authenticate('local', (err, user, info) => {
+    console.log("HERE")
     if (err) { return next(err); }
     if (!user) {
+      console.log("sddd");
       req.flash('errors', info);
-      return res.redirect('/login');
+      res.redirect('/login');
     }
     req.logIn(user, (err) => {
+      console.log("ooooo");
       if (err) { return next(err); }
-      return res.redirect('/account/dashboard');
+      // req.session.user = req.body;
+      res.redirect('/account/dashboard');
     });
   })(req, res, next);
 };
@@ -105,13 +109,16 @@ exports.postSignup = (req, res, next) => {
   .then(exists => {
     if (!exists){
       aUser.save();
-      res.redirect('/api/twilio');
     } 
     else{
       validationErrors.push({msg: "We found an account with that email. Please log in instead."});
       req.flash('errors', );
       return res.redirect('/signup', validationErrors);
     }
+  })
+  .then(user => {
+    // req.session.user = req.body;
+    res.redirect('/api/twilio');
   })
   .catch(err => console.log(err))};
 

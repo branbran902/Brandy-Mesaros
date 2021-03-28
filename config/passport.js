@@ -11,13 +11,12 @@ const { user } = require('../models/user');
 const { isMatch } = require('lodash');
 const { session } = require('../models/session');
 
-module.exports = (app, passport) => {
-passport.serializeuser((user, done) => {
+passport.serializeUser((user, done) => {
   return done(null, user.id);
 });
 
-passport.deserializeuser((id, done) => {
-  user.findById(id, (err, user) => {
+passport.deserializeUser((id, done) => {
+  user.findByPk(id, (err, user) => {
     return done(err, user);
   });
 });
@@ -26,25 +25,24 @@ passport.deserializeuser((id, done) => {
 /**
  * Sign in using Email and Password.
  */
-passport.use(new LocalStrategy({ usernameField: 'pauljacobs117@yahoo.com', passwordField: 'zjg26107'}, (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email'}, (email, password, done) => {
+  console.log(email);
+  console.log(password);
   user.findOne({ where: { email: email.toLowerCase() }})
   .then(exists => {
+    console.log(exists.password);
     if (!exists){
       return done(null, false, { msg: `Email ${email} not found.` });
     }
-    if (!exists.password){
+    if (password == null){
       return done(null, false, { msg: 'Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.' });
     }
-  })
-  .then(password => {
-    if(isMatch) {
-      return done(null, user);
+    if (password == exists.password){
+      return done(null, exists.dataValues);
     }
     return done(null, false, { msg: 'Invalid email or password.' });
   })
   .catch(err => console.log(err));
-
-
 }));
 
 /**
@@ -248,11 +246,13 @@ const googleStrategyConfig = new GoogleStrategy({
 passport.use('google', googleStrategyConfig);
 refresh.use('google', googleStrategyConfig);
 
+
 /**
  * Login Required middleware.
  */
 exports.isAuthenticated = (req, res, next) => {
-  console.log(req.isAuthenticated());
+  console.log(req);
+  console.log(res);
   if (req.isAuthenticated()) {
     return next();
   }
@@ -307,4 +307,3 @@ exports.isAuthorized = (req, res, next) => {
     return res.redirect(`/auth/${provider}`);
   }
 };
-}

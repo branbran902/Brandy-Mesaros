@@ -45,6 +45,7 @@ const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const navbarController = require('./controllers/navbar');
 const errorController = require('./controllers/error');
+const listingController = require('./controllers/listing');
 
 /**
  * Create Express server.
@@ -60,18 +61,18 @@ app.use(
   session({
     key: 'user_sid',
     secret: "keyboard cat",
-    store: sessionStore,
-    saveUninitialized: false,
-    resave: false,
-    proxy: true,
-    cookie: {
-      expires: 600000,
-      httpOnly: false
-  }
+  //   store: sessionStore,
+  //   saveUninitialized: false,
+  //   resave: false,
+  //   proxy: true,
+  //   cookie: {
+  //     expires: 600000,
+  //     httpOnly: false
+  // }
   })
 );
 
-sessionStore.sync();
+// sessionStore.sync();
 
 
 /**
@@ -173,7 +174,7 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
-app.get('/account/dashboard', passportConfig.isAuthenticated, userController.getDashboard);
+app.get('/account/dashboard', userController.getDashboard);
 
 //NAVBAR
 app.get('/about', navbarController.getAbout);
@@ -214,6 +215,11 @@ app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) => {
   res.redirect(req.session.returnTo || '/');
 });
+
+/**
+ * Listings
+ */
+ app.get('/newListing', listingController.getNewListing);
 
 /**
  * Error Handler.

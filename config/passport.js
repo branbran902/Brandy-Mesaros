@@ -9,7 +9,6 @@ const _ = require('lodash');
 const moment = require('moment');
 const { user } = require('../models/user');
 const { isMatch } = require('lodash');
-const { session } = require('../models/session');
 
 passport.serializeUser((user, done) => {
   return done(null, user.id);

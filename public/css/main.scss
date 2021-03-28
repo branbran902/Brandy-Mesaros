@@ -20,6 +20,22 @@ $lightBlue: #05D7D7;
 $darkBlue:  #23426E;
 $darkGray: #2b2d2e;
 
+.green {
+  color: $green;
+}
+
+.lightBlue {
+  color: $lightBlue;
+}
+
+.darkBlue {
+  color: $darkBlue;
+}
+
+.darkGray {
+  color: $darkGray;
+}
+
 // Scaffolding
 // -------------------------
 
@@ -67,7 +83,7 @@ footer {
 }
 
 .default {
-  padding: 10%;
+  padding: 5%;
 }
 
 
@@ -494,6 +510,71 @@ $enable-gradients: true;
 
 #whyHost{
   background-image: url(/imgs/SimpleRoom.jpg);
-  
 }
+
+// Dashboard
+// ---------------------------
+.dashboard {
+  background-image: url(/imgs/PlaneBackground_Blue.jpg);
+
+  .contentBox {
+    margin: 2%;
+    padding: 5%;
+    background-color: white;
+    border-radius: 25px;
+
+    .listing {
+      height: 400px;
+      padding: 1%;
+
+      .innerListing {
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        height: 100%;
+        padding: 2%;
+      }
+
+      .btn {
+        background-color: lightgray !important;
+      }
+
+      a
+        {
+
+          p {
+            margin: 0 !important;
+            font-size: 3rem;
+            }
+        }
+      }
+    }
+  
+
+
+  h1{
+    color: white;
+  }
+
+  #newListing{
+    text-align: center;
+    color:lightgray;
+
+    p {
+      margin: auto;
+      padding-top: 40%;
+      font-size: 2rem;
+    }
+  }
+}
+
+.carousel-inner{
+  height: 150px;
+}
+
+#carouselExampleControls{
+  height: 150px;
+}
+
 

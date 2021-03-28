@@ -12,6 +12,8 @@ const user = sequelize.define('user', {
   gender: Sequelize.STRING,
   location: Sequelize.STRING,
   bio: Sequelize.STRING,
+  school: Sequelize.STRING,
+  work: Sequelize.STRING,
   password: Sequelize.STRING,
   passwordResetToken: Sequelize.STRING,
   passwordResetExpires: Sequelize.DATE,
@@ -22,8 +24,8 @@ const user = sequelize.define('user', {
   google: Sequelize.STRING,
 }, { timestamps: true });
 
-// user.hasOne(Profile);
-// Profile.belongsTo(user);
+// user.hasMany(listing);
+// listing.belongsTo(user);
 
 /**
  * Password hash middleware.

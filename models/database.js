@@ -7,7 +7,7 @@ const sequelize = new Sequelize(process.env.POSTGRES_DB,
                                     port: process.env.POSTGRES_PORT,
                                     dialect: 'postgres',
                                     dialectOptions: {
-                                        ssl: process.env.POSTGRES_DB_SSL == "true"
+                                        ssl: process.env.POSTGRES_SSL == "true"
                                     }
                                 },{
                                   logging: console.log,  

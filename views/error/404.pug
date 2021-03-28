@@ -2,10 +2,11 @@ extends ../layout
 
 block content
     .default
-        h1 Mayday! Mayday! Mayday!
+        h1 NOT FOUND
+        h2 Error Code: 404
         
         br
 
         if errors
             for error, i in errors
-                p #{ errors }
+                div.alert.alert-danger #{ error }

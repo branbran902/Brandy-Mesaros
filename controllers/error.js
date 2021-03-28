@@ -8,6 +8,16 @@
     });
   };
 
+/**
+ * GET /404
+ * Error 404 page.
+ */
+ exports.get404 = (req, res) => {
+  res.render('error/404', {
+    title: '404'
+  });
+};
+
 
 /**
  * GET /oops

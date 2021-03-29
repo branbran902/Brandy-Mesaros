@@ -11,4 +11,12 @@ const listing = require('../models/listing');
   };
 
 
-  
+  /**
+ * GET listingByID
+ * Gets new listing View
+ */
+ exports.getListingById = (req, res) => {
+  res.render('listing/listing', {
+    title: 'listing'
+  });
+};

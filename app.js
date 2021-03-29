@@ -220,6 +220,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
  * Listings
  */
  app.get('/newListing', listingController.getNewListing);
+ app.get('/listing', listingController.getListingById);
 
 /**
  * Error Handler.

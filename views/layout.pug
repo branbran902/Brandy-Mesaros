@@ -9,7 +9,6 @@ html
     title #{title} - Crewmates
     link(rel='shortcut icon', href='/imgs/favicon.svg')
     link(rel='stylesheet', href='/css/main.css')
-    <script src="jquery-3.5.1.min.js"></script>
     block head
 
   body
@@ -18,7 +17,7 @@ html
       include partials/flash
       block content
 
-    include partials/footer
+      include partials/footer
 
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/popper.min.js')

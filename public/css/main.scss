@@ -11,7 +11,7 @@
 // -------------------------
 $enable-responsive-font-sizes: true;
 $font-size-base: 1rem;
-$h2-font-size: 2rem;
+$h2-font-size: 1.5rem;
 
 // Crewmates Colors
 // -------------------------
@@ -19,6 +19,22 @@ $green: #94BA33;
 $lightBlue: #05D7D7;
 $darkBlue:  #23426E;
 $darkGray: #2b2d2e;
+
+.green {
+  color: $green;
+}
+
+.lightBlue {
+  color: $lightBlue;
+}
+
+.darkBlue {
+  color: $darkBlue;
+}
+
+.darkGray {
+  color: $darkGray;
+}
 
 // Scaffolding
 // -------------------------
@@ -36,14 +52,13 @@ html {
 
 body {
   height: 100%;
-  // font-size: 14px;
   @include font-size(1rem);
 }
 
 footer {
   font-size: 1.25em;
   color: white;
-  position: absolute;
+  //position: absolute;
   background-color: $darkGray;
   bottom: 0;
   width: 100%;
@@ -62,12 +77,12 @@ footer {
 }
 
 .row {
-  height: 100%;
+  // height: 100%;
   margin: 0;
 }
 
 .default {
-  padding: 10%;
+  padding: 5%;
 }
 
 
@@ -178,9 +193,9 @@ textarea {
   background-color: $green;
   border: none;
   color: white;
-  padding: 15px 45px 27px 45px;
+  // padding: 15px 45px 27px 45px;
+  padding: 5% 10% 5% 10%;
   text-align: center;
-  font-size: x-large;
   margin: 4px 2px;
   border-radius: 50px;
 
@@ -266,6 +281,7 @@ $enable-gradients: true;
 
 .fas {
   margin-right: 6px;
+  margin-bottom: 0;
 }
 
 .far {
@@ -347,9 +363,10 @@ $enable-gradients: true;
   }
 
   .first-side{
-    padding:10%;
+    padding:3%;
 
     .h2 {
+      font-size: 1.5rem;
       padding-bottom: 5%;
     }
   }
@@ -364,9 +381,10 @@ $enable-gradients: true;
   }
 
   .first-side{
-    padding: 5%;
+    padding: 3%;
 
     .h2 {
+      font-size: 1.5rem;
       padding-bottom: 1%;
     }
   }
@@ -379,17 +397,18 @@ $enable-gradients: true;
 
     h1 {
       color: $darkBlue;
-      font-size: 5em;
+      font-size: 3em;
     }
 
     h2 {
+      font-size: 1.5rem;
       color: $darkBlue;
       font-weight: lighter;
 
     }
 
     a {
-      font-size: 2em;
+      font-size: 1.5em;
       color: $darkBlue;
     }
 
@@ -418,7 +437,7 @@ $enable-gradients: true;
   padding-top: 20%;
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: white;
     }
 
@@ -494,6 +513,131 @@ $enable-gradients: true;
 
 #whyHost{
   background-image: url(/imgs/SimpleRoom.jpg);
-  
 }
+
+// Dashboard
+// ---------------------------
+.dashboard {
+  background-image: url(/imgs/PlaneBackground_Blue.jpg);
+
+  .contentBox {
+    margin: 2%;
+    padding: 5%;
+    background-color: white;
+    border-radius: 25px;
+
+    .listing {
+      height: 400px;
+      padding: 1%;
+
+      .innerListing {
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        height: 100%;
+        padding: 2%;
+
+
+.carousel-inner{
+  height: 150px;
+}
+
+#carouselExampleControls{
+  height: 150px;
+}
+      }
+
+      .btn {
+        background-color: lightgray !important;
+      }
+
+      a
+        {
+
+          p {
+            margin: 0 !important;
+            font-size: 3rem;
+            }
+        }
+      }
+    }
+  
+
+
+  h1{
+    color: white;
+  }
+
+  #newListing{
+    text-align: center;
+    color:lightgray;
+
+    p {
+      margin: auto;
+      padding-top: 40%;
+      font-size: 2rem;
+    }
+  }
+}
+
+// Listing
+// ---------------------------
+
+.imagePreviews{
+  max-height: 40vh;
+  overflow:hidden;
+
+
+      img {
+        object-fit: cover;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        border-radius: 15px;
+
+      }
+
+      .primary {
+        padding: 1%;
+        max-height: 40vh;
+        overflow:hidden;
+      }
+
+      .secondary {
+        padding: 1% 1% 1% 0%;
+        max-height: 20vh;
+        overflow:hidden;
+      }
+    }
+
+// Sticky
+// ------------------------
+#sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  width: 100%;
+  top: 70px;
+  padding-bottom: 3%;
+  box-shadow: 0 0 6px lightgray;
+  color: black;
+  border-radius: 15px;
+ }
+
+ .price {
+   padding: 3% 4% 3% 4%;
+   height: fit-content;
+   background-color: $darkBlue;
+   color: white;
+   border-radius: 15px 15px 0 0;
+ }
+
+ .smallInput {
+   input {
+    margin: 0 auto;
+    margin-top:  3%;
+    font-size: medium;
+   }
+ }
 

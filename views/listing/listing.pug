@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+    .default.listing
+        .row.imagePreviews
+            .col-md-4 
+                h1 Little Blue House Crashpad
+                p Hosted by Brandy Mesaros
+                p.fas.fa-star 
+                span 5 stars
+                br
+                p.fas.fa-globe-americas
+                span Denver, CO, United States
+
+                
+
+            .col-md-4 
+                img.img-fluid.primary(src='https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg' alt='Responsive image')
+            .col-md-4 
+                .row
+                    img.img-fluid.secondary(src='https://images.adsttc.com/media/images/5014/01bd/28ba/0d3b/4500/0b8c/large_jpg/stringio.jpg?1414576505' alt='Responsive image')
+                .row
+                    img.img-fluid.secondary(src='https://media.architecturaldigest.com/photos/5eac5fa22105f13b72dede45/3:2/w_1599,h_1066,c_limit/111LexowAve_Aug18-1074.jpg' alt='Responsive image')
+
+        br
+        hr
+
+        .row   
+            .col-md-8
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a viverra ante, maximus consectetur est. Pellentesque vitae erat lacus. Maecenas ut erat feugiat sapien mattis bibendum in at quam. Integer ac mi lectus. Ut dui mauris, laoreet sit amet augue vel, egestas interdum tortor. Quisque id dictum neque, in gravida odio. Quisque non massa vel orci efficitur maximus venenatis in massa.Vivamus fringilla ligula odio, a molestie dolor tincidunt eget. Suspendisse libero felis, lacinia id facilisis id, imperdiet quis nisi. Vestibulum id lacus vel risus feugiat ultrices a in arcu. Integer nec hendrerit lorem. Etiam fringilla a augue ut dignissim. Nunc placerat purus nec nisl condimentum eleifend. Praesent scelerisque erat eget tortor vulputate, porttitor fringilla nibh accumsan. Pellentesque accumsan ligula sed convallis pellentesque. Ut tincidunt lectus at hendrerit tempor. Suspendisse euismod sem in diam efficitur laoreet. Donec facilisis imperdiet felis a varius. Proin aliquet nulla ac turpis imperdiet rhoncus. Nullam tortor lectus, porta nec feugiat sed, sodales in arcu. Ut vitae vulputate nulla, nec aliquam tellus. Nullam consectetur fermentum est, sit amet euismod ligula scelerisque a.Nam ut metus quis justo tristique porttitor a a odio. Donec id urna ut leo finibus gravida non in elit. Vivamus pretium id tortor eget porttitor. Nullam pretium velit eget bibendum convallis. Vivamus ultrices gravida nunc at feugiat. Pellentesque consectetur tristique fringilla. Donec auctor, elit dictum lacinia volutpat, tellus massa varius eros, vel porta metus ipsum ac erat.In rutrum posuere magna ut imperdiet. Cras a condimentum orci, a venenatis sapien. Pellentesque varius ullamcorper eros in dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut venenatis eros vitae elit cursus, in elementum est dapibus. Quisque ut leo porta, commodo augue sed, egestas velit. Morbi ut arcu eget urna volutpat ornare nec ut dolor. Nunc vitae quam a augue venenatis sodales. Donec tempor quis nunc sed pharetra. Aenean ac congue nisl, non lobortis elit. Mauris interdum sed risus sit amet elementum. Donec felis quam, faucibus et ultrices cursus, egestas non mi. Mauris sed scelerisque mauris. Pellentesque consequat massa sed laoreet porttitor. Cras eu mauris neque. Aliquam pellentesque viverra leo, nec vehicula leo.Cras imperdiet sit amet diam vitae auctor. Nunc facilisis mauris vitae ipsum sodales dictum. Cras et risus pharetra, facilisis lorem ut, ultricies nunc. Nullam sed fermentum elit. In quis facilisis ligula, non gravida ante. Nam mattis sapien a lobortis dapibus. Nullam pulvinar tincidunt lorem, eu laoreet leo fringilla eu. Cras lorem mi, pellentesque non mi eget, pharetra blandit dolor. Nunc sit amet facilisis massa. Pellentesque at nulla id est luctus placerat a eu elit.
+    
+            .col-md-4
+                div#sticky
+                    div.price
+                        b $75 per Night
+                        br
+                    form.smallInput(method='POST')
+                        .row 
+                            .col
+                                br
+                                b Check In
+                                input.form-control(type='date', name='checkIn', id='checkIn', placeholder='Check In', required)
+                            .col
+                                br
+                                b Check Out
+                                input.form-control(type='date', name='checkOut', id='checkOut', placeholder='Check Out', required)
+
+            

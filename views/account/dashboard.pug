@@ -1,8 +1,57 @@
 extends ../layout
 
 block content
-    .default
-        h2 Dashboard #{user.email}
+    .default.dashboard
+        //- h2 Dashboard #{user.email}
+        h1 Dashboard
+        .row 
+            .col-md-6 
+                .contentBox 
+                    h2 Good Evening Brandy
+            
+            .col-md-6 
+                .contentBox 
+                    h2 Insights
+                    p You have 3 new messages
+
+
+        
+
+        .contentBox
+            h2 Your Listings
+            <br>
+
+                .row 
+                    .col-md-3.listing 
+                        div.innerListing
+                            <br>
+                            #carouselExampleControls.carousel.slide(data-ride='carousel')
+                                .carousel-inner
+                                    .carousel-item.active
+                                        img.d-block.w-100(src='https://mediavault.point2.com/p2h/listing/9a1b/a0cb/1505/4810162fc0f16593a17d/wm_large.jpg' alt='First slide')
+                                    .carousel-item
+                                        img.d-block.w-100(src='https://assets.blog.hgtv.ca/wp-content/uploads/2020/07/27141435/creative-bedroom-upgrades-feature.jpg' alt='Second slide')
+                                    .carousel-item
+                                        img.d-block.w-100(src='https://us.123rf.com/450wm/alabn/alabn1711/alabn171100018/89128801-fabulous-foyer-features-staircase-wall-adorned-with-board-and-batten-and-fitted-with-a-wood-console-.jpg?ver=6' alt='Third slide')
+                                a.carousel-control-prev(href='#carouselExampleControls' role='button' data-slide='prev')
+                                    span.carousel-control-prev-icon(aria-hidden='true')
+                                    span.sr-only Previous
+                                a.carousel-control-next(href='#carouselExampleControls' role='button' data-slide='next')
+                                    span.carousel-control-next-icon(aria-hidden='true')
+                                    span.sr-only Next
+
+                            <br>                      
+                            h5 The Blue House
+
+                
+                
+                    .col-md-3.listing.text-center
+                        div.innerListing
+                            #newListing
+                                p ADD NEW LISTING
+                            a.btn(href='/newListing')
+                                p.fas.fa-plus-circle
+                       
 
 
 

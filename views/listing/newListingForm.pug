@@ -1,4 +1,118 @@
 extends ../layout
 
 block content
-    .default
+     #bg-div
+      .row.justify-content-center
+        .col-lg-12.col-12.formContent
+          .card.card0
+            #wrapper.d-flex
+              // Sidebar
+              #sidebar-wrapper.border-right
+                .sidebar-heading.pt-5.pb-4
+                .list-group.list-group-flush
+                  a#tab1.tabs.list-group-item.active1(data-toggle='tab' href='#menu1')
+                    .list-div.my-2
+                      .fa.fa-home
+                      | &nbsp;&nbsp; The Basics
+                  a#tab2.tabs.list-group-item.bg-light(data-toggle='tab' href='#menu2')
+                    .list-div.my-2
+                      .fa.fa-credit-card
+                      | &nbsp;&nbsp; Bedrooms
+                  a#tab3.tabs.list-group-item.bg-light(data-toggle='tab' href='#menu3')
+                    .list-div.my-2
+                      .fa.fa-qrcode
+                      | &nbsp;&nbsp;&nbsp; Images
+                      span#new-label NEW
+                  a#tab4.tabs.list-group-item.bg-light(data-toggle='tab' href='#menu4')
+                        .list-div.my-2
+                        .fa.fa-qrcode
+                        | &nbsp;&nbsp;&nbsp; Preview
+              // Page Content
+              #page-content-wrapper
+                #border-btm.row.pt-3
+                  .col-4
+                    button#menu-toggle.btn.btn-success.mt-4.ml-3.mb-3
+                      .bar4
+                      .bar4
+                      .bar4
+                //-   .col-8
+                //-     .row.justify-content-right
+                //-       .col-12
+                //-         h2.mb-0.mr-4.text-right  Let's create a new listing
+                .tab-content
+                  #menu1.tab-pane.in.active
+                    .row.justify-content-center
+                      .col-11
+                        .form-card
+                          h3.mt-0.mb-4.text-center The Basics
+                          form
+                            .row
+                              .col-12
+                                .input-group
+                                  input(type='text' name='title' id='title' placeholder="Spongebob's Pineapple" required)
+                                  label TITLE*
+                            .row
+                              .col-12
+                                .input-group
+                                  input(type='text' name='location' id='location' placeholder='Under the Sea' required)
+                                  label LOCATION*
+                            .row
+                              .col-12
+                                .input-group
+                                  input(type='text' name='type' id='type' placeholder='House' required)
+                                  label Type*
+                            .row
+                              .col-12
+                                .input-group
+                                  textarea.placeicon(name='desc' id='description' placeholder='Big, yellow, and close to the Krusty Krabs...' rows='4' minlength='8' maxlength='255' required)
+                                  label DESCRIPTION*
+                            .row
+                              .col-md-12
+                                input.btn.btn-success.placeicon(value='Continue')
+                  #menu2.tab-pane
+                    .row.justify-content-center
+                      .col-11
+                        .form-card
+                          h3.mt-0.mb-4.text-center Bedrooms
+                          form
+                            //- .row
+                            //-   .col-4
+                            //-     .input-group
+                            //-       input(type='number' id='accommodates' placeholder='2' min='1' max='50')
+                            //-       label ACCOMADATES*
+                            //-   .col-8
+                            //-     .input-group
+                            //-       input(type='text' id='gender' placeholder='Female Only')
+                            //-       label GENDER*
+                            //- .row
+                            //-   .col-4
+                            //-     .input-group
+                            //-       input#exp(type='number' name='numOfBedrooms' placeholder='3' minlength='0' maxlength='50')
+                            //-       label NUMBER OF BEDROOMS*
+                            //-   .col-4
+                            //-     .input-group
+                            //-       input.placeicon(type='number' name='numOfBeds' placeholder='8' minlength='0' maxlength='50')
+                            //-       label NUMBER OF BEDS*
+                            //-   .col-4
+                            //-     .input-group
+                            //-       input.placeicon(type='text' name='typeOfBeds' placeholder='queen' minlength='3' maxlength='3')
+                            //-       label TYPE OF BEDS*
+                            //- .row
+                            //-   .col-md-12
+                            //-     input.btn.btn-success.placeicon(type='submit' value='Pay $ 100')
+                            //- .row
+                            //-   .col-md-12
+                            //-     p#below-btn.text-center.mb-5
+                            //-       a(href='#') Use a test card
+                            
+
+                  #menu3.tab-pane
+                    .row.justify-content-center
+                      .col-11
+                        .form-card
+                            h3.mt-0.mb-4.text-center Images
+                            form
+                            .row
+                              .col-12
+                                 #my-awesome-dropzone.dropzone(action='/file-upload')
+                                

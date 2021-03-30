@@ -6,8 +6,8 @@ block content
       .offset-md-3.col-md-7.pl-2
         h1 Welcome Back!
         h2 Please log in with one of the following:
-      form(method='POST')
-        .form-group
+      form
+        .row
           .offset-md-3.col-md-7.pl-2
             a.btn.btn-google.social-btns(href='/auth/google')
               p.fab.fa-google-plus-g.fa-xs
@@ -15,28 +15,33 @@ block content
               p.fab.fa-facebook-f.fa-sm
             a.btn.btn-twitter.social-btns(href='/auth/twitter')
               p.fab.fa-twitter.fa-sm
-        .offset-md-3.col-md-7.pl-2
+          .offset-md-3.col-md-7.pl-2
             h2 or use your email account:
-        input(type='hidden', name='_csrf', value=_csrf)
-        .form-group.row
-          .offset-md-4.col-md-5.pl-2
-            input.form-control(type='email', name='email', id='email', placeholder='Email*', autofocus, autocomplete='email', required)
-        .form-group.row
-          .offset-md-4.col-md-5.pl-2
-            input.form-control(type='password', name='password', id='password', placeholder='Password*', autocomplete='current-password', required)
-        .form-group-row 
-          .offset-md-3.col-md-7.pl-2
-            a.btn-link(href='/forgot') Forgot your password?
-        .form-group
-          .offset-md-6.col-md-1.pl-2
-            hr
-        .form-group.row
-          .offset-md-3.col-md-7.pl-2
-            button.col-md-3.btn.submit(type='submit')
-              | Login
+        .form-card
+          .row
+            .offset-md-4.col-md-5
+              .input-group
+                input(type='email' id='email' placeholder='John.Smith@example.com')
+                label Email*
+          .row
+            .offset-md-4.col-md-5
+              .input-group
+                input(type='password' name='password' placeholder='**********')
+                label Password*
+              
+          .form-group-row 
+            .offset-md-3.col-md-7.pl-2
+              a.btn-link(href='/forgot') Forgot your password?
+          .form-group
+            .offset-md-6.col-md-1.pl-2
+              hr
+          .form-group.row
+            .offset-md-3.col-md-7.pl-2
+              button.col-md-3.btn.submit(type='submit')
+                | Login
     .col-md-3.text-center.other-side
-      h1 Need an Account?
-      br
-      a.notabtn.signup(href='/signup') 
-        | Sign Up Today
+        h1 Need an Account?
+        br
+        a.notabtn.signup(href='/signup') 
+          | Sign Up Today
 

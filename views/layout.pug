@@ -9,20 +9,24 @@ html
     title #{title} - Crewmates
     link(rel='shortcut icon', href='/imgs/favicon.svg')
     link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/dropzone.css')
     block head
+  
+  #content-wrap 
+    body
+      .container-fluid
+        include partials/header
+        include partials/flash
+        block content
 
-  body
-    .container-fluid
-      include partials/header
-      include partials/flash
-      block content
-
-      include partials/footer
+  include partials/footer
 
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/popper.min.js')
     script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/lib/dropzone.min.js')
     script(src='/js/main.js')
+   
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.

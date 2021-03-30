@@ -1,7 +1,7 @@
 # Crewmates-Website
 
 Offical website for Crewmates. 
-Used a boilerplate Node.js made by Sahat's open source project (https://github.com/sahat/hackathon-starter)
+
 
 Getting Started
 ---------------
@@ -57,6 +57,11 @@ Integrations
 - Facebook Login
 - Twitter Login
 - Strip Payment
+
+Openn Sourced Projects
+-----------------------
+Used a boilerplate Node.js made by Sahat's open source project (https://github.com/sahat/hackathon-starter)
+Used Dropzone to easily drag and drop images (https://github.com/dropzone/dropzone)
 
 Common issues
 ---------------

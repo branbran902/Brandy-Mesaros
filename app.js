@@ -17,6 +17,7 @@ const sass = require('node-sass-middleware');
 const multer = require('multer');
 const Sequelize = require("sequelize");
 const session = require("express-session");
+// const dropzone = require("dropzone");
 
 // Initalize sequelize with session store
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -153,6 +154,7 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/chart.js/di
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
+app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/dropzone/dist/min'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
 
 /**

@@ -6,7 +6,8 @@ block content
       .offset-md-3.col-md-7.pl-2
         h1 Welcome Back!
         h2 Please log in with one of the following:
-      form
+      form(method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
         .row
           .offset-md-3.col-md-7.pl-2
             a.btn.btn-google.social-btns(href='/auth/google')
@@ -21,12 +22,12 @@ block content
           .row
             .offset-md-4.col-md-5
               .input-group
-                input(type='email' id='email' placeholder='John.Smith@example.com')
+                input(type='email' name='email' id='email' placeholder='John.Smith@example.com' autofocus autocomplete='email' required)
                 label Email*
           .row
             .offset-md-4.col-md-5
               .input-group
-                input(type='password' name='password' placeholder='**********')
+                input(type='password' name='password' id='password' placeholder='**********' autocomplete='current-password', required)
                 label Password*
               
           .form-group-row 

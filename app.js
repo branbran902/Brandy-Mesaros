@@ -62,13 +62,13 @@ app.use(
   session({
     key: 'user_sid',
     secret: "keyboard cat",
-  //   store: sessionStore,
-  //   saveUninitialized: false,
-  //   resave: false,
-  //   proxy: true,
-  //   cookie: {
-  //     expires: 600000,
-  //     httpOnly: false
+    // store: sessionStore,
+    // saveUninitialized: false,
+    // resave: false,
+    // proxy: true,
+    // cookie: {
+    //   expires: 600000,
+    //   httpOnly: false
   // }
   })
 );
@@ -221,7 +221,8 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 /**
  * Listings
  */
- app.get('/newListing', listingController.getNewListing);
+ app.get('/new-listing', listingController.getNewListing);
+ app.post('/new-listing', listingController.postNewListing);
  app.get('/listing', listingController.getListingById);
 
 /**

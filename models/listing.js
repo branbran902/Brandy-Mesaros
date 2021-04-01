@@ -15,8 +15,6 @@ const listing = sequelize.define('listing', {
   numOfBathrooms: Sequelize.INTEGER,
   numOfGuests: Sequelize.INTEGER,
   numOfBeds: Sequelize.INTEGER,
-
-
 }, { timestamps: true });
 
 listing.sync({ force: true})

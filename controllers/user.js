@@ -6,7 +6,6 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const { user } = require('../models/user');
 const { sequelize} = require('../models/database');
-
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 
@@ -44,7 +43,7 @@ exports.postLogin = (req, res, next) => {
     if (!user) {
       console.log("sddd");
       req.flash('errors', info);
-      res.redirect('/login');
+      return res.redirect('/login');
     }
     req.logIn(user, (err) => {
       console.log("ooooo");
@@ -96,6 +95,7 @@ exports.postSignup = (req, res, next) => {
     return res.redirect('/signup');
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+
   const aUser = user.build({
     firstName: req.body.firstname,
     lastName: req.body.lastname,

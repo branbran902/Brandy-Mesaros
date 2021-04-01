@@ -28,9 +28,8 @@ passport.use(new LocalStrategy({ usernameField: 'email'}, (email, password, done
   console.log(email);
   console.log(password);
   user.findOne({ where: { email: email.toLowerCase() }})
-  .then(exists => {
-    console.log(exists.password);
-    if (!exists){
+  .then(account => {
+    if (account == null){
       return done(null, false, { msg: `Email ${email} not found.` });
     }
     if (password == null){

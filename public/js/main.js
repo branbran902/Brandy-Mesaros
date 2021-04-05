@@ -40,6 +40,20 @@ $(document).ready(function(){
 
   //For dropzone
   $('.dropzone').acceptedFiles = "image/*";
-
                     
   })
+
+ function getListing(id) {
+    var base_url = window.location.origin;
+    console.log(base_url);
+    window.location.href = base_url + '/listing' + id;
+    }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('bookedDates');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    themeSystem: 'standard'
+  });
+  calendar.render();
+});

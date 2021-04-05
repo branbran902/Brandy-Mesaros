@@ -30,7 +30,7 @@ exports.postNewListing = (req, res, next) => {
     location: req.body.location,
     typeOfBed: req.body.typeOfBed,
     about: req.body.desc,
-    propertyType: req.body.type
+    propertyType: req.body.type,
   });
   
   console.log(aListing);
@@ -57,7 +57,12 @@ exports.getAccount = (req, res) => {
  * Gets new listing View
  */
  exports.getListingById = (req, res) => {
-  res.render('listing/listing', {
-    title: 'listing'
-  });
-};
+   listing.findOne({ where: { userId: null}})
+   .then(listing => {
+      res.render('listing/listing', {
+      title: listing.title,
+      listing: listing
+      })
+    })
+  .catch(err => console.log(err))
+ };

@@ -8,6 +8,7 @@
 
 
 
+
 // For dynamic font sizes
 // -------------------------
 $enable-responsive-font-sizes: true;
@@ -393,6 +394,7 @@ $enable-gradients: true;
 // Login/Singup Page
 // -------------------------
 .log-in{
+  // height: 100vh;
   
   h1 {
     font-size: 4em;
@@ -474,6 +476,7 @@ $enable-gradients: true;
   background-image: url(/imgs/PlaneBackground_Blue.jpg);
   // height: 100vh;
   padding-top: 20%;
+  padding-bottom: 20%;
 
     h1 {
       font-size: 2.5rem;
@@ -526,6 +529,11 @@ $enable-gradients: true;
   font-size: x-large;
 }
 
+#book {
+  width: 100%;
+  font-weight: 600;
+}
+
 // imgs
 // ---------------------------
 .header {
@@ -554,6 +562,8 @@ $enable-gradients: true;
     padding: 5%;
     background-color: white;
     border-radius: 25px;
+    height: 100%;
+    width: 100%;
 
     .listing {
       height: 400px;

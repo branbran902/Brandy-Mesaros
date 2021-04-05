@@ -6,6 +6,7 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const { user } = require('../models/user');
 const { sequelize} = require('../models/database');
+const { listing } = require('../models/listing')
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 
@@ -320,7 +321,43 @@ exports.postForgot = (req, res, next) => {
  * The Dashboard
  */
  exports.getDashboard= (req, res) => {
-  res.render('account/dashboard', {
-    title: 'Dashboard'
-  });
-};
+  listing.findAll({ where: { userId: null}})
+  .then(listing => {
+    if(!listing){
+      res.render('account/dashboard', {
+        listings: null
+       })
+    //  req.flash('errors', { msg: 'There was an error loading the listings' });
+    }
+    else{
+    // console.log(listing);
+
+     var today = new Date().getHours();
+     var greeting = "Hello";
+
+     if(today >= 5 && today <= 12 ){
+       greeting = "Good Morning"
+     }
+     else if (today > 12 && today <= 18){
+      greeting = "Good Afternoon"
+     }
+     else if (today > 18 && today <= 22){
+      greeting = "Good Evening"
+     }
+     else if (today > 22 && today <= 5){
+      greeting = "Good Night"
+     }
+
+     console.log(today);
+
+    res.render('account/dashboard', {
+     listings: listing,
+     greeting: greeting
+    })
+  }})
+  .catch(err => console.log(err))};
+
+//   res.render('account/dashboard', {
+//     title: 'Dashboard'
+//   });
+// };

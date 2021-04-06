@@ -5,6 +5,7 @@
 @import "node_modules/@fortawesome/fontawesome-free/scss/brands";
 @import "node_modules/@fortawesome/fontawesome-free/scss/regular";
 @import "node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import 'node_modules/intl-tel-input/build/css/intlTelInput.css';
 
 
 
@@ -73,6 +74,24 @@ footer {
     margin-bottom: 0;
     padding-top: 2%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px $darkGray; 
+  background-color: lightgray;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: $darkBlue;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $darkBlue; 
 }
 
 // Bootstrap standards
@@ -680,8 +699,28 @@ $enable-gradients: true;
    }
  }
 
+ // Twilio - Verify
+// ------------------------
 
-// form
+//  #partitioned {
+//   padding-left: 15px;
+//   letter-spacing: 42px;
+//   border: 0;
+//   background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+//   background-position: bottom;
+//   background-size: 50px 1px;
+//   background-repeat: repeat-x;
+//   background-position-x: 35px;
+// }
+
+.verifyNum {
+  text-align: center;
+  margin-left: 2%;
+  margin-right: 2%;
+  font-size: xx-large;
+}
+
+// New listing form
 // ------------------------
 
 #border-btm {
@@ -893,3 +932,16 @@ input.btn-success {
 
 }
 
+
+// Twilio
+// ------------------------
+
+.iti {
+width: 100%;
+}
+
+.iti__flag {background-image: url("node_modules/intl-tel-input/build/img/flags.png");}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {background-image: url("node_modules/intl-tel-input/build/img/flags@2x.png");}
+}

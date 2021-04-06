@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+    .default
+        .offset-md-3.col-md-6.text-center
+            h1 Almost there!
+            p Please enter the 6 digit code that has been sent to: #{phone}
+        .offset-lg-4.col-lg-4
+            form#verifyForm(role='form', method='POST')
+                input(type='hidden', name='_csrf', value=_csrf)
+                input(type='hidden', id='code' name='code', value="")
+                .row.mt-5
+                    input#num1.form-control.col.verifyNum(type='text', name='num1', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                    input#num2.form-control.col.verifyNum(type='text', name='num2', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                    input#num3.form-control.col.verifyNum(type='text', name='num3', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                    input#num4.form-control.col.verifyNum(type='text', name='num4', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                    input#num5.form-control.col.verifyNum(type='text', name='num5', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                    input#num6.form-control.col.verifyNum(type='text', name='num6', oninput='javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);', maxlength="1")
+                   
+                .form-group
+                    .row
+                        a.blue.float-left(href='/api/twilio') 
+                            i.fas.fa-arrow-circle-left.fa-sm
+                            | Back
+

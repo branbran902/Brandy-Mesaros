@@ -32,8 +32,7 @@ exports.postNewListing = (req, res, next) => {
     about: req.body.desc,
     propertyType: req.body.type,
   });
-  
-  console.log(aListing);
+
 
   aListing.save()
   .then(user => {return res.render('account/dashboard'); })

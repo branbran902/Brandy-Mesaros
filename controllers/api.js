@@ -146,7 +146,8 @@ exports.postTwilio = (req, res, next) => {
   //For some reason the validator isEmpty functinon is not working correctly
   // if (validator.isEmpty(req.body.number)) validationErrors.push({ msg: 'Phone number is required.' });
 
-  var pn = req.body.phoneNumber;
+  var pn = req.body.phone;
+
   if (!pn.trim()) {
     validationErrors.push({ msg: 'Phone number is required.' });
   }
@@ -158,16 +159,55 @@ exports.postTwilio = (req, res, next) => {
     res.redirect('/oops?error=' + string);
   }
 
-  const message = {
-    to: pn,
-    from: '+14154461279',
-    body: 'Hello'
-  };
-  twilio.messages.create(message).then((sentMessage) => {
-    req.flash('success', { msg: `Text send to ${sentMessage.to}` });
-    res.redirect('/account/dashboard');
-  }).catch(next);
+
+  twilio.verify.services(process.env.TWILIO_VAID)
+             .verifications
+             .create({to: pn, channel: 'sms'})
+             .then(res.redirect('/api/twilio-verify?phone=' + pn))
+             .catch(err => console.log(err))
+
+             
 };
+
+/**
+ * GET /api/twilio-verify
+ * Twilio Veridy
+ */
+ exports.getTwilioVerify = (req, res) => {
+   var phone = req.query.phone;
+
+  res.render('api/twilio-verify', {
+    title: 'Twilio Verify',
+    phone: phone
+  });
+};
+
+/**
+ * POST /api/twilio-verify
+ * Twilio Verify
+ */
+ exports.postTwilioVerify = (req, res) => {
+  const validationErrors = [];
+
+  var phone = req.query.phone;
+  var code = req.body.code;
+
+  twilio.verify.services(process.env.TWILIO_VAID)
+      .verificationChecks
+      .create({to: '+' + phone, code: code})
+      // .then(res.redirect('/account/dashboard'))
+      .then((response) => {
+        if (response.valid === true) {
+        res.redirect('/account/dashboard');
+        } else {
+          validationErrors.push({ msg: 'Code is invalid. Please try again.' })
+          req.flash('errors', validationErrors);
+          res.redirect('/api/twilio-verify');
+        }
+    })
+      .catch(err => console.log(err))
+ };
+
 
 
 // /**

@@ -184,6 +184,12 @@ app.get('/about', navbarController.getAbout);
 app.get('/why-host', navbarController.getWhyHost);
 
 
+ //Listings
+ app.get('/new-listing', listingController.getNewListing);
+ app.post('/new-listing', listingController.postNewListing);
+ app.get('/listing', listingController.getListingById);
+
+
 //ERROR
 app.get('/oops', errorController.getOops);
 app.get('/503', errorController.get503);
@@ -196,6 +202,8 @@ app.get('/503', errorController.get503);
 // app.post('/api/stripe', apiController.postStripe);
 app.get('/api/twilio', apiController.getTwilio);
 app.post('/api/twilio', apiController.postTwilio);
+app.get('/api/twilio-verify', apiController.getTwilioVerify);
+app.post('/api/twilio-verify', apiController.postTwilioVerify);
 // app.get('/api/facebook', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 // app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
 // app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
@@ -219,12 +227,6 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
   res.redirect(req.session.returnTo || '/');
 });
 
-/**
- * Listings
- */
- app.get('/new-listing', listingController.getNewListing);
- app.post('/new-listing', listingController.postNewListing);
- app.get('/listing', listingController.getListingById);
 
 /**
  * Error Handler.

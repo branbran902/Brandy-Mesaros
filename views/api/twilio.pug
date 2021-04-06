@@ -3,13 +3,21 @@ extends ../layout
 block content
   .default
     .row
-      h1.offset-md-3 Welcome to the Crew!
-      .offset-md-3
-        form(role='form', method='POST')
+      h1.offset-md-3.col-md-6 Welcome to the Crew!
+      .offset-md-3.col-md-6 
+        form(role='form', id="phoneForm", method="POST")
           p To help keep your account safe and secure we would like to send you a verification code. Please enter your cell phone number below:
           input(type='hidden', name='_csrf', value=_csrf)
-          .form-group
-            input.form-control(type='tel', name='phoneNumber', autofocus)
-          button.btn(type='submit')
-            i.fas.fa-location-arrow.fa-sm
-            | Send
+          input(type='hidden', id='phone' name='phone', value='')
+          .row.form-group#verifyPhoneNumber
+            .col-md-8
+              input.form-control(type='tel', id='interPhone' name='phoneNumber', autofocus)
+              #error.alert.alert-danger(role='alert' style='display: none')
+            .col-md-4
+              button.btn(onclick="process(event)")
+                i.fas.fa-location-arrow.fa-sm
+                | Send
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js')
+  script
+    include ../../public/js/twilio.js

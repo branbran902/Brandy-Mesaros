@@ -39,15 +39,12 @@ exports.postLogin = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   passport.authenticate('local', (err, user, info) => {
-    console.log("HERE")
     if (err) { return next(err); }
     if (!user) {
-      console.log("sddd");
       req.flash('errors', info);
       return res.redirect('/login');
     }
     req.logIn(user, (err) => {
-      console.log("ooooo");
       if (err) { return next(err); }
       // req.session.user = req.body;
       res.redirect('/account/dashboard');
@@ -113,8 +110,8 @@ exports.postSignup = (req, res, next) => {
     } 
     else{
       validationErrors.push({msg: "We found an account with that email. Please log in instead."});
-      req.flash('errors', );
-      return res.redirect('/signup', validationErrors);
+      req.flash('errors', validationErrors);
+      return res.redirect('/signup');
     }
   })
   .then(user => {
@@ -347,8 +344,6 @@ exports.postForgot = (req, res, next) => {
      else if (today > 22 && today <= 5){
       greeting = "Good Night"
      }
-
-     console.log(today);
 
     res.render('account/dashboard', {
      listings: listing,

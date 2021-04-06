@@ -5,14 +5,18 @@ block content
     h1.offset-md-3 Forgot Your Password?
     form(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
-      p.offset-md-3 No problem! Enter your email address below and we will send you password reset instructions.
+      p.offset-md-3.col-md-6 No problem! Enter your email address below and we will send you password reset instructions.
       .form-group.row
-          input.offset-md-3.col-md-5.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
-      .form-group.offset-sm-3
-        button.btn.btn-primary(type='submit')
-          i.fas.fa-key.fa-sm
-          | Send Reset Password Email
-      .form-group.offset-sm-3
-        a.blue(href='/login') 
-          i.fas.fa-arrow-circle-left.fa-sm
-          | Back to Login
+          input.offset-md-3.col-md-6.form-control.mb-2(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+      .form-group
+        .div.offset-sm-3.col-md-6.px-0
+          .row
+            .col
+              a.blue.float-left(href='/login') 
+                i.fas.fa-arrow-circle-left.fa-sm
+                | Back to Login
+            .col
+              button.btn.btn-primary.float-right(type='submit')
+                i.fas.fa-key.fa-sm
+                | Send
+        
